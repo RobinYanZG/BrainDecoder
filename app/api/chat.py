@@ -17,7 +17,11 @@ async def chat(
 ):
     try:
         logger.info("***********************chat***********************")
-        answer, history = chat_service.chat(query_obj.query, query_obj.history)
+        answer, history = chat_service.chat(
+            query=query_obj.query, 
+            history=query_obj.history,
+            vector_index=query_obj.vector_index
+        )
         return SuccessResponse({"answer": answer, "history": history})
     except Exception as e:
         logger.error(traceback.print_exc())

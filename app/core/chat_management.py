@@ -18,10 +18,10 @@ class ChatManagement:
         self.prompt_mngr = PromptManagement()
         self.vsMngr = VectorStoreManagement()
     
-    def chat(self, query: str, history: list) -> tuple:
+    def chat(self, query: str, history: list, vector_index: str = "LaborLaw") -> tuple:
         logger.info(f"Chatting with query: {query}")
         logger.info("loading vector store")
-        self.vsMngr.load("LaborLaw", self.embedding)
+        self.vsMngr.load(vector_index, self.embedding)
         
         logger.info("searching for similar documents")
         related_docs_with_score = self.vsMngr.similarity_search(query, k=10)
