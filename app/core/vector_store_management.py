@@ -1,17 +1,14 @@
-from langchain.vectorstores import FAISS
 import os
-
+from langchain.vectorstores import FAISS
+from app.helper.path import path
 from app.core.model.embedding_model import EmbeddingModel
-
-
-vector_store_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "vector_store")
 
 
 class VectorStoreManagement: 
     vector_store: FAISS
     
     def load(self, index_key: str, embedding: EmbeddingModel) -> object:
-        key = os.path.join(vector_store_path, index_key)
+        key = os.path.join(path.VECTOR_STORE_PATH, index_key)
         print(key)
         self.vector_store = FAISS.load_local(key, embedding)
         
