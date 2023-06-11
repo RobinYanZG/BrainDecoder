@@ -2,6 +2,7 @@ from app.core.model.embedding_model import EmbeddingModel
 from app.core.model.llm_model import LLMModel
 from app.core.prompt_management import PromptManagement
 from app.core.vector_store_management import VectorStoreManagement
+from app.core.torch_management import torchMngr
 
 
 class ChatManagement: 
@@ -18,11 +19,13 @@ class ChatManagement:
     
     def chat(self, query: str, history: list) -> tuple:
         self.vsMngr.load("LaborLaw", self.embedding)
-        
         related_docs_with_score = self.vsMngr.similarity_search(query, k=10)
+        torchMngr.gc()
+        
         prompt = self.prompt_mngr.generate_prompt(related_docs_with_score, query)
         
         response, history = self.llm_model.chat(prompt, history)
+        torchMngr.gc()
         return response, history
     
 chat_management = ChatManagement()
