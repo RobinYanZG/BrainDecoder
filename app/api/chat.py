@@ -4,6 +4,7 @@ from app.helper.depends import get_chat_service
 from app.helper.logger import logger
 from app.helper.response import SuccessResponse, ErrorResponse
 from app.model.dto.chat import ChatRequest
+from app.model.user import User
 from app.service.chat_service import ChatService
 
 
@@ -27,3 +28,7 @@ async def chat(
         logger.error(traceback.print_exc())
         return ErrorResponse(str(e))
 
+@router.get("/test")
+async def test():
+    users = User.select()
+    return SuccessResponse({'users': [user.username for user in users]})
