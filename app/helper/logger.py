@@ -1,6 +1,6 @@
 import logging
 
-logger = logging.getLogger("LegalDecoder")
+logger = logging.getLogger("BrainDecoder")
 logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
