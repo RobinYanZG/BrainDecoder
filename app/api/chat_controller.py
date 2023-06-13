@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, Body
 from app.helper.depends import get_chat_service
 from app.helper.logger import logger
 from app.helper.response import SuccessResponse, ErrorResponse
-from app.model.dto.chat import ChatRequest
+from app.model.dto.chat_dto import ChatRequest
 from app.model.user import User
 from app.service.chat_service import ChatService
 
