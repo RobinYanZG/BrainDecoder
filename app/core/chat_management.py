@@ -24,13 +24,13 @@ class ChatManagement:
         self.vsMngr.load(vector_index, self.embedding)
         
         logger.info("searching for similar documents")
-        related_docs_with_score = self.vsMngr.similarity_search_with_score(query, k=10)
-        print(related_docs_with_score)
+        related_docs = self.vsMngr.similarity_search_under_score(query, 500) # score越接近0越好，太大不相关
+        print(related_docs)
         
         torchMngr.gc()
         
         logger.info("generating prompt")
-        prompt = self.prompt_mngr.generate_prompt(related_docs_with_score, query)
+        prompt = self.prompt_mngr.generate_prompt(related_docs, query)
         logger.info(f"prompt: {prompt}")
         
         logger.info("chatting with llm model")

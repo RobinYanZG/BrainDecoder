@@ -14,3 +14,12 @@ class VectorStoreManagement:
         
     def similarity_search_with_score(self, query: str, k: int) -> list:
         return self.vector_store.similarity_search_with_score(query, k)
+    
+    def similarity_search_under_score(self, query: str, score: int, k:int=10) -> list:
+        result = []
+        records = self.similarity_search_with_score(query, k)
+        for record in records:
+            if record[1] < score:
+                result.append(record[0])
+        
+        return result
