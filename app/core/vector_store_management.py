@@ -12,5 +12,5 @@ class VectorStoreManagement:
         print(key)
         self.vector_store = FAISS.load_local(key, embedding)
         
-    def similarity_search(self, query: str, k: int) -> list:
+    def similarity_search_with_score(self, query: str, k: int) -> list:
         return self.vector_store.similarity_search_with_score(query, k)
